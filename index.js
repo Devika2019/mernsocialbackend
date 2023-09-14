@@ -9,6 +9,7 @@ const authRouter = require("./routes/auth");
 const postsRouter = require("./routes/posts");
 const multer = require("multer");
 const path = require("path");
+const PORT = process.env.PORT || 8800
 
 
 dotenv.config();
@@ -18,7 +19,7 @@ mongoose.connect(process.env.MONGO_URL, {
   })
   .then(() => {
     console.log("Connected to Mongo");
-    app.listen(8800, () => {
+    app.listen(PORT, () => {
       console.log("Backend server is ready");
     });
   })
