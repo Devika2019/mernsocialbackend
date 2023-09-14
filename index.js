@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require('cors');
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
@@ -28,6 +29,13 @@ mongoose.connect(process.env.MONGO_URL, {
   });
   app.use("/images", express.static(path.join(__dirname, "public/images")));
   //middleware
+  const corsOptions = {
+    origin: 'https://silver-pixie-f52ac7.netlify.app', // Replace with your Netlify app URL
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Include cookies and authentication headers
+  };
+  
+  app.use(cors(corsOptions));
   app.use(express.json());
   app.use(helmet());
   app.use(morgan("common"));
